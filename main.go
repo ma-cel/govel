@@ -2,6 +2,7 @@ package main
 
 import (
 	"govel/http"
+	"govel/http/middleware"
 	"govel/internal/core"
 	"log"
 	"os"
@@ -19,6 +20,7 @@ func main() {
 
 	e := &core.GovelEcho{Echo: echo.New()}
 	http.RegisterRoutes(e)
+	middleware.RegisterGlobalMiddleware(e)
 
 	port := os.Getenv("APP_PORT")
 	if port == "" {

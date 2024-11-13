@@ -1,8 +1,9 @@
 package middleware
 
 import (
+	"govel/internal/core"
+
 	"github.com/labstack/echo/v4/middleware"
-	"goopher/internal/core"
 )
 
 func RegisterGlobalMiddleware(e *core.GovelEcho) {

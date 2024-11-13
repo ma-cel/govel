@@ -1,7 +1,7 @@
 package http
 
 import (
-	"govel/controllers"
+	"govel/http/controllers"
 	"govel/internal/core"
 )
 
