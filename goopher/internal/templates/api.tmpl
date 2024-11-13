@@ -1,0 +1,11 @@
+package routes
+
+import (
+    "goopher/core"
+    "goopher/controllers"
+)
+
+func RegisterRoutes(e *core.GovalEcho) {
+	//Example route
+    e.GET("/hello", &controllers.HelloWorldController{})
+}
