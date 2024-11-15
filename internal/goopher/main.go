@@ -4,7 +4,9 @@ import (
 	"embed"
 	"fmt"
 	"goopher/internal"
+	"log"
 	"os"
+	"os/exec"
 	"strings"
 	"text/template"
 )
@@ -13,7 +15,7 @@ import (
 var templatesFS embed.FS
 
 func main() {
-	if len(os.Args) < 2 {
+	if len(os.Args) < 1 {
 		fmt.Println("Usage: goval setup <project> or make:<type> name")
 		return
 	}
@@ -25,6 +27,16 @@ func main() {
 			fmt.Println("Setup failed:", err)
 		}
 
+		return
+	}
+
+	if command == "serve" {
+		cmd := exec.Command("go", "run", ".")
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		if err := cmd.Run(); err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 
@@ -54,7 +66,7 @@ func createController(controllerName string) {
 	fmt.Printf("Creating controller: %s\n", controllerName)
 
 	// TODO: Put those base paths in config
-	dirName := "controllers"
+	dirName := "http/controllers"
 	fileName := fmt.Sprintf("%s/%s.go", dirName, strings.ToLower(controllerName))
 
 	if _, err := os.Stat(dirName); os.IsNotExist(err) {
