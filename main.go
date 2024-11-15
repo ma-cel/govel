@@ -15,7 +15,7 @@ func main() {
 
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env")
+		log.Fatal("Error loading .env, did you rename .env.example?")
 	}
 
 	e := &core.GovelEcho{Echo: echo.New()}
